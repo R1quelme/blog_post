@@ -1,0 +1,186 @@
+import React, { useCallback, useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+
+import { SearchBar } from '../../components/SearchBar';
+import { PostsCard, PostCardProps } from '../../components/PostsCards';
+
+import {
+    Container,
+    Header,
+    UserWrapper,
+    UserInfo,
+    Photo,
+    User,
+    UserGreeting,
+    UserName,
+    UserPhrase,
+    Icon,
+    Posts,
+    // Title,
+    PostList,
+    LogoutButton
+} from './styles';
+import { useAuth } from '../../hooks/auth';
+import { Alert } from 'react-native';
+
+export interface DataListProps extends PostCardProps {
+    id: string;
+}
+
+const navigation = useNavigation();
+
+function handleView(post: DataListProps){
+    navigation.navigate('View', { post })
+}
+
+export function Dashboard() {
+    // const data: DataListProps[] = [
+    //     {
+    //         id: '1',
+    //         userName: "Matheus Riquelme",
+    //         title: "Titulo do post",
+    //         content: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
+    //         date: "27/10/2021"
+    //     },
+    // ];
+    const [data, setData] = useState<DataListProps[]>([]);
+    const [searchListData, setSearchListData] = useState<DataListProps[]>([]);
+    const [searchText, setSearchText] = useState('');
+
+    const { user, signOut } = useAuth();
+ 
+    const dataKey = `@blogpost:posts:${user.id}`;
+
+    async function loadTransactions(){
+        const response = await AsyncStorage.getItem(dataKey);
+        const posts = response ? JSON.parse(response) : [];
+
+        const postsFormatted: DataListProps[] = 
+        posts.map((item: DataListProps) => {
+
+            const date = Intl.DateTimeFormat('pt-BR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: '2-digit'
+            }).format(new Date(item.date));
+
+            return {
+                id: item.id,
+                // userName: item.userName,
+                title: item.title,
+                content: item.content,
+                date
+            }
+        })   
+
+        setData(postsFormatted);
+        setSearchListData(postsFormatted);
+
+        // setData(postsFormatted)
+        
+        // if(response){
+        //     const parsedData = JSON.parse(response);
+        
+        //     setSearchListData(parsedData);
+        //     setData(parsedData);
+        // }
+    }
+
+    useEffect(() => {
+        loadTransactions()
+    }, []);
+
+    useFocusEffect(useCallback(() => {
+        loadTransactions()
+    },[]));
+
+    function handleFilterLoginData() {
+        const filteredData = data.filter(data => {
+            const isValid = data.title
+                .toLowerCase()  
+                .includes(searchText.toLowerCase());
+
+            if(isValid) {
+                return data;
+            }
+        })
+      
+        setSearchListData(filteredData)
+    }
+
+    function handleChangeInputText(text: string) {
+        if(!text) {
+           setSearchListData(data)
+        }
+
+        setSearchText(text);
+    }
+    
+
+    async function handleRemoveSkill(transactionId: string) {
+        const response = await AsyncStorage.getItem(dataKey);
+        const storagedTransactions = response ? JSON.parse(response) : [];
+       
+        const filteredTransactions = storagedTransactions
+        .filter((transaction: DataListProps) => transaction.id !== transactionId);
+      
+        setData(filteredTransactions);
+        await AsyncStorage.setItem(dataKey, JSON.stringify(filteredTransactions));
+  
+        loadTransactions()
+    }
+    
+    function alerta(title: string, id: string){
+        Alert.alert(`Você deseja deletar ${String(title)}`,
+        "",
+        [
+            {text: 'Cancelar', },
+            {text: 'Deletar', onPress: () => handleRemoveSkill(id) },
+        ],
+            {cancelable: false}
+        )
+    }
+
+    return (
+        <Container>
+            <Header>
+                <UserWrapper>
+                    <UserInfo>
+                        <Photo source={{ uri: user.photo }}/>
+                        <User>
+                            <UserGreeting>Olá,  
+                                <UserName> { user.name }</UserName>
+                            </UserGreeting>
+                            <UserPhrase>Compartilhe conhecimentos</UserPhrase>
+                        </User>
+                    </UserInfo>
+                    <LogoutButton onPress={signOut}>
+                        <Icon name="power"/>
+                    </LogoutButton>
+                </UserWrapper>
+            </Header>
+
+            <SearchBar 
+                placeholder="Qual post você procura?"
+                onChangeText={handleChangeInputText}
+                value={searchText}
+                returnKeyType="search"
+                onSubmitEditing={handleFilterLoginData}
+                onSearchButtonPress={handleFilterLoginData}
+            />
+
+            <Posts>
+                {/* <Title>Publicações</Title> */}
+                <PostList 
+                    data={searchListData}
+                    keyExtractor={item => item.id}
+                    renderItem={({ item }) => 
+                        <PostsCard data={item} buttonDelete={() => alerta(item.title, item.id)} buttonView={() => handleView(item)}/>
+                    }
+                />
+            </Posts>
+        </Container>
+    )
+}

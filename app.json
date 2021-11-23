@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "name": "blog_post",
+    "slug": "blog_post",
+    "scheme": "blog_post",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "blog_post"
+}
