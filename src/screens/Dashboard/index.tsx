@@ -29,22 +29,14 @@ export interface DataListProps extends PostCardProps {
     id: string;
 }
 
-const navigation = useNavigation();
 
-function handleView(post: DataListProps){
-    navigation.navigate('View', { post })
-}
 
 export function Dashboard() {
-    // const data: DataListProps[] = [
-    //     {
-    //         id: '1',
-    //         userName: "Matheus Riquelme",
-    //         title: "Titulo do post",
-    //         content: "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
-    //         date: "27/10/2021"
-    //     },
-    // ];
+    const navigation = useNavigation();
+    function handleView(post: DataListProps){
+        navigation.navigate('View', { post })
+    }
+
     const [data, setData] = useState<DataListProps[]>([]);
     const [searchListData, setSearchListData] = useState<DataListProps[]>([]);
     const [searchText, setSearchText] = useState('');
@@ -77,15 +69,6 @@ export function Dashboard() {
 
         setData(postsFormatted);
         setSearchListData(postsFormatted);
-
-        // setData(postsFormatted)
-        
-        // if(response){
-        //     const parsedData = JSON.parse(response);
-        
-        //     setSearchListData(parsedData);
-        //     setData(parsedData);
-        // }
     }
 
     useEffect(() => {

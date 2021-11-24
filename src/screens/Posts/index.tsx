@@ -42,6 +42,7 @@ export function Posts() {
             if (record[0].startsWith(dataKey)) {
                 //pega o value e converte em um array de posts
                 const posts = JSON.parse(record[1]!);
+                console.log(record[1])
 
                 //formata a data
                 const postsFormattedByKey: DataListProps[] = posts
@@ -91,7 +92,7 @@ export function Posts() {
                 <PostList 
                     data={ListData}
                     keyExtractor={item => item.id}
-                    renderItem={({ item }) => <PostsCard data={item} buttonDelete={() => {}}/>}
+                    renderItem={({ item }) => <PostsCard data={item} buttonDelete={() => {}} buttonView={() => {}}/>}
                 />
             </Post>
         </Container>

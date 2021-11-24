@@ -10,6 +10,7 @@ import { Dashboard } from "../screens/Dashboard";
 import { Register } from "../screens/Register";
 import { Posts } from "../screens/Posts";
 import { View } from "../screens/View";
+import { Api } from "../screens/ScreenApi";
 
 export function AppRoutes(){
     const theme = useTheme();
@@ -68,7 +69,7 @@ export function AppRoutes(){
             />
             <Screen 
                 name="API"
-                component={Register}
+                component={Api}
                 options={{
                     tabBarIcon: (({size, color}) => 
                         <MaterialIcons 
@@ -79,7 +80,7 @@ export function AppRoutes(){
                     )
                 }}
             />
-            <Screen 
+            {/* <Screen 
                 name="View"
                 component={View}
                 options={{
@@ -91,7 +92,7 @@ export function AppRoutes(){
                         />
                     )
                 }}
-            />
+            /> */}
         </Navigator>
     )
 }

@@ -63,12 +63,6 @@ export const UserGreeting = styled.Text`
     font-family: ${({ theme }) => theme.fonts.regular};
 `;
 
-export const UserName = styled.Text`
-    color: ${({ theme }) => theme.colors.shape};
-    font-size: ${RFValue(18)}px;
-    font-family: ${({ theme }) => theme.fonts.bold}
-`; 
-
 export const LogoutButton = styled(BorderlessButton)``;
 
 export const Icon = styled(MaterialIcons)`
@@ -83,11 +77,6 @@ export const Posts = styled.View`
     margin-top: ${RFPercentage(4)}px;
 `;
 
-/* export const Title = styled.Text`
-    font-size: ${RFValue(18)}px;
-    font-family: ${({ theme }) => theme.fonts.regular};
-`; */
-
 export const PostList = styled(
     FlatList as new () => FlatList<DataListProps>
     ).attrs({
@@ -98,3 +87,9 @@ export const PostList = styled(
 })`
 
 `;
+
+export const UserName = styled.Text`
+    color: ${({ theme }) => theme.colors.shape};
+    font-size: ${RFValue(18)}px;
+    font-family: ${({ theme }) => theme.fonts.bold}
+`; 
