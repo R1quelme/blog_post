@@ -45,7 +45,7 @@ function AuthProvider({ children }: AuthProviderProps){
     const [user, setUser] = useState<User>({} as User); 
     const [userStorageLoading , setUserStorageLoading] = useState(true);
 
-    const dataKey = '@blogpost:posts';
+    const dataKey = '@blogpost:user';
 
     async function signInWithGoogle() {
         try {
