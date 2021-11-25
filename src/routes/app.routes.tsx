@@ -3,8 +3,12 @@ import { Platform } from 'react-native';
 import { useTheme } from 'styled-components';
 import { MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const { Navigator, Screen } = createBottomTabNavigator();
+// const { Navigator, Screen } = createBottomTabNavigator();
+
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 import { Dashboard } from "../screens/Dashboard"; 
 import { Register } from "../screens/Register";
@@ -16,7 +20,7 @@ export function AppRoutes(){
     const theme = useTheme();
 
     return (
-        <Navigator
+        <Tab.Navigator
             screenOptions={{
                 headerShown: false,
                 tabBarActiveTintColor: theme.colors.secondary,
@@ -28,7 +32,7 @@ export function AppRoutes(){
                 }
             }}
         >
-            <Screen 
+            <Tab.Screen 
                 name="Meus"
                 component={Dashboard}
                 options={{
@@ -41,7 +45,7 @@ export function AppRoutes(){
                     )
                 }}
             />
-            <Screen 
+            <Tab.Screen 
                 name="Posts" 
                 component={Posts}
                 options={{
@@ -54,7 +58,7 @@ export function AppRoutes(){
                     )
                 }}
             />
-            <Screen 
+            <Tab.Screen 
                 name="Publicar"
                 component={Register}
                 options={{
@@ -67,7 +71,7 @@ export function AppRoutes(){
                     )
                 }}
             />
-            <Screen 
+            <Tab.Screen 
                 name="API"
                 component={Api}
                 options={{
@@ -80,20 +84,17 @@ export function AppRoutes(){
                     )
                 }}
             />
-            <Screen 
-                name="View"
-                component={View}
-                options={{
-                    tabBarIcon: (({size, color}) => 
-                        <MaterialIcons 
-                            name="remove-red-eye"
-                            size={size}
-                            color={color}
-                        />
-                    )
-                }}
-            />
-        </Navigator>
+        </Tab.Navigator>
     )
 }
 
+export function Routes() {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen 
+                name="View"
+                component={View}
+            />
+        </Stack.Navigator>
+    )
+}
