@@ -41,7 +41,7 @@ export function AppRoutes(){
                     )
                 }}
             />
-            {/* <Screen 
+            <Screen 
                 name="Posts" 
                 component={Posts}
                 options={{
@@ -53,7 +53,7 @@ export function AppRoutes(){
                         />
                     )
                 }}
-            /> */}
+            />
             <Screen 
                 name="Publicar"
                 component={Register}
