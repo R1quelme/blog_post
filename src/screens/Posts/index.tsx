@@ -9,7 +9,7 @@ import {
     Post,
     PostList
 } from './styles'
-import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
 export interface DataListProps extends PostCardProps {
     id: string;
@@ -19,6 +19,8 @@ export interface DataListProps extends PostCardProps {
 export function Posts() {
     const [data, setData] = useState<DataListProps[]>([]);
     const [ListData, setListData] = useState<DataListProps[]>([]);
+
+    const navigation = useNavigation();
 
     const dataKey = '@blogpost:posts';
 
@@ -92,7 +94,7 @@ export function Posts() {
                 <PostList 
                     data={ListData}
                     keyExtractor={item => item.id}
-                    renderItem={({ item }) => <PostsCard data={item} buttonDelete={() => {}} buttonView={() => {}}/>}
+                    renderItem={({ item }) => <PostsCard data={item} buttonDelete={() => {}} buttonView={() => {navigation.navigate('View', { post: item })}}/>}
                 />
             </Post>
         </Container>

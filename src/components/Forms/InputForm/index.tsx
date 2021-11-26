@@ -13,12 +13,14 @@ interface Props extends TextInputProps {
     control: Control;
     name: string;
     error: string;
+    multiline: boolean;
 }
 
 export function InputForm({
     control,
     name,
     error,
+    multiline,
     ...rest
 }: Props){
     return(

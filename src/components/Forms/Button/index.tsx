@@ -1,5 +1,6 @@
 import React from "react";
 import { RectButtonProps } from 'react-native-gesture-handler';
+import { multiply } from "react-native-reanimated";
 
 import { Container, Title } from "./styles";
 
@@ -11,7 +12,7 @@ interface Props extends RectButtonProps{
 export function Button({ 
     title, 
     onPress,
-    ...rest 
+    ...rest
 }: Props){
     return (
         <Container onPress={onPress} {...rest}>

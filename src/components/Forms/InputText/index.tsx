@@ -7,6 +7,6 @@ type Props = TextInputProps;
 
 export function InputText({...rest} : Props){
     return (
-        <Container {...rest} multiline/>
+        <Container {...rest} />
     );
 }

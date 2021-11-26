@@ -118,6 +118,7 @@ export function Register(){
                             autoCapitalize="sentences"
                             autoCorrect={false}
                             error={errors.title && errors.title.message}
+                            multiline={false}
                         />
                         <InputForm
                             name="content"
@@ -126,6 +127,7 @@ export function Register(){
                             autoCapitalize="sentences"
                             autoCorrect={false}
                             error={errors.content && errors.content.message}
+                            multiline={true}
                         />
                     </Fields>
                     <Button 

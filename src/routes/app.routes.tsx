@@ -16,7 +16,7 @@ import { Posts } from "../screens/Posts";
 import { View } from "../screens/View";
 import { Api } from "../screens/ScreenApi";
 
-export function AppRoutes(){
+export function TabRoutes(){
     const theme = useTheme();
 
     return (
@@ -88,9 +88,17 @@ export function AppRoutes(){
     )
 }
 
-export function Routes() {
+export function AppRoutes() {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator
+            screenOptions={{
+                headerShown: false
+            }}
+        >
+            <Stack.Screen 
+                name="App"
+                component={TabRoutes}
+            />
             <Stack.Screen 
                 name="View"
                 component={View}
@@ -98,3 +106,6 @@ export function Routes() {
         </Stack.Navigator>
     )
 }
+
+
+

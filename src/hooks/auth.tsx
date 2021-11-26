@@ -49,6 +49,7 @@ function AuthProvider({ children }: AuthProviderProps){
 
     async function signInWithGoogle() {
         try {
+            // await AsyncStorage.clear();
             const CLIENT_ID = '260655641588-931qi9ifvp6v0teu7b10g2b3vhekc7pq.apps.googleusercontent.com';
             const REDIRECT_URI = 'https://auth.expo.io/@r1quelme/blog_post'; 
             // as duas constantes acimas são dados sensiveis, 
