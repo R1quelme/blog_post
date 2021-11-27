@@ -25,9 +25,7 @@ import {
 import { useAuth } from '../../hooks/auth';
 import { Alert } from 'react-native';
 
-export interface DataListProps extends PostCardProps {
-    id: string;
-}
+import { usePost } from "../../hooks/usePost";
 
 export type EditTitleArgs = {
     titleId: string;
@@ -36,55 +34,23 @@ export type EditTitleArgs = {
 
 export function Dashboard() {
     const navigation = useNavigation();
-    function handleView(post: DataListProps){
-        navigation.navigate('View', { post })
-    }
-
-    const [data, setData] = useState<DataListProps[]>([]);
-    const [searchListData, setSearchListData] = useState<DataListProps[]>([]);
-    const [searchText, setSearchText] = useState('');
-    const [title, setTitle] = useState<DataListProps[]>([])
-
     const { user, signOut } = useAuth();
- 
-    const dataKey = `@blogpost:posts:${user.id}`;
+    const { posts, editPostTitle, removePost } = usePost();
+    
 
-    async function loadTransactions(){
-        const response = await AsyncStorage.getItem(dataKey);
-        const posts = response ? JSON.parse(response) : [];
-
-        const postsFormatted: DataListProps[] = 
-        posts.map((item: DataListProps) => {
-
-            const date = Intl.DateTimeFormat('pt-BR', {
-                day: '2-digit',
-                month: '2-digit',
-                year: '2-digit'
-            }).format(new Date(item.date));
-
-            return {
-                id: item.id,
-                // userName: item.userName,
-                title: item.title,
-                content: item.content,
-                date
-            }
-        })   
-
-        setData(postsFormatted);
-        setSearchListData(postsFormatted);
+    function handleView(post: any){
+        //navigation.navigate('View', { post })
     }
 
+    const [searchData, setSearchData] = useState(posts);
+    const [searchText, setSearchText] = useState('');
+ 
     useEffect(() => {
-        loadTransactions()
-    }, []);
-
-    useFocusEffect(useCallback(() => {
-        loadTransactions()
-    },[]));
+        handleFilterLoginData();
+    }, [posts]);
 
     function handleFilterLoginData() {
-        const filteredData = data.filter(data => {
+        const filteredData = posts.filter(data => {
             const isValid = data.title
                 .toLowerCase()  
                 .includes(searchText.toLowerCase());
@@ -94,28 +60,19 @@ export function Dashboard() {
             }
         })
       
-        setSearchListData(filteredData)
+        setSearchData(filteredData)
     }
 
     function handleChangeInputText(text: string) {
         if(!text) {
-           setSearchListData(data)
+            setSearchData(posts);
         }
 
         setSearchText(text);
     }
 
     async function handleRemoveSkill(transactionId: string) {
-        const response = await AsyncStorage.getItem(dataKey);
-        const storagedTransactions = response ? JSON.parse(response) : [];
-       
-        const filteredTransactions = storagedTransactions
-        .filter((transaction: DataListProps) => transaction.id !== transactionId);
-      
-        setData(filteredTransactions);
-        await AsyncStorage.setItem(dataKey, JSON.stringify(filteredTransactions));
-  
-        loadTransactions()
+        removePost(transactionId);
     }
     
     function alerta(title: string, id: string){
@@ -130,16 +87,7 @@ export function Dashboard() {
     }
 
     function handleEditTitle({ titleId, postNewTitle }: EditTitleArgs){
-        const updatedTitle = title.map(title => ({...title}))
-
-        const titleToBeUpdated = updatedTitle.find(title => title.id === titleId)
-
-        if(!titleToBeUpdated)
-            return;
-
-        titleToBeUpdated.title = postNewTitle;
-
-        setTitle(updatedTitle);
+        editPostTitle(titleId, postNewTitle);
     }
 
     return (
@@ -173,7 +121,7 @@ export function Dashboard() {
             <Posts>
                 {/* <Title>Publicações</Title> */}
                 <PostList 
-                    data={searchListData}
+                    data={searchData}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => 
                         <PostsCard 

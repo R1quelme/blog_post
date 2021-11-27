@@ -1,141 +1,92 @@
-import React, { useEffect } from 'react';
-import { 
-    Modal, 
-    TouchableWithoutFeedback, 
-    Keyboard,
-    Alert
-} from 'react-native';
-import * as Yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import uuid from 'react-native-uuid';
+import React from "react";
 
-import { useForm } from 'react-hook-form';
-import { useNavigation } from '@react-navigation/native';
+import { TouchableWithoutFeedback, Keyboard, Alert } from "react-native";
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import uuid from "react-native-uuid";
 
-import { Input } from '../../components/Forms/Input'
-import { InputText } from '../../components/Forms/InputText'
-import { InputForm } from '../../components/Forms/InputForm'
-import { Button } from '../../components/Forms/Button'
+import { useForm } from "react-hook-form";
+import { useNavigation } from "@react-navigation/native";
 
- 
-import {
-    Container,
-    Header,
-    Title,
-    Form,
-    Fields
-} from './styles';
-import { useAuth } from '../../hooks/auth';
+import { InputForm } from "../../components/Forms/InputForm";
+import { Button } from "../../components/Forms/Button";
+
+import { Container, Header, Title, Form, Fields } from "./styles";
+import { useAuth } from "../../hooks/auth";
+import { usePost } from "../../hooks/usePost";
 
 interface FormData {
-    title: string;
-    content: string;
+  title: string;
+  content: string;
 }
 
 const schema = Yup.object().shape({
-    title: Yup
-    .string()
-    .required('Titulo é obrigatorio'),
-    content: Yup
-    .string()
-    .required('Conteudo é obrigatório')
-})
+  title: Yup.string().required("Titulo é obrigatorio"),
+  content: Yup.string().required("Conteudo é obrigatório"),
+});
 
-export function Register(){
-    const { user } = useAuth()
+export function Register() {
+  const { user } = useAuth();
+  const { createPost } = usePost();
 
-    const dataKey = `@blogpost:posts:${user.id}`;
-    const navigation = useNavigation();
+  const dataKey = `@blogpost:posts:${user.id}`;
+  const navigation = useNavigation();
 
-    const { 
-        control,
-        handleSubmit,
-        reset,
-        formState: { errors }
-    } = useForm({
-        resolver: yupResolver(schema)
-    });
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
-    async function handleRegister(form: FormData){
-        const newTransaction = {
-            id: String(uuid.v4()),
-            title: form.title,
-            content: form.content,
-            date: new Date()
-        }
-        
-        try {
-            const data = await AsyncStorage.getItem(dataKey);
-            const currentData = data ? JSON.parse(data) : [];
+  async function handleRegister(form: FormData) {
+    const newPost = {
+      id: String(uuid.v4()),
+      title: form.title,
+      content: form.content,
+      date: Intl.DateTimeFormat("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "2-digit",
+      }).format(new Date),
+    };
 
-            const dataFormatted = [
-                ...currentData,
-                newTransaction
-            ]
+    createPost(newPost);
+  }
 
-            await AsyncStorage.setItem(dataKey, JSON.stringify(dataFormatted))
-            reset();
+  return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <Container>
+        <Header>
+          <Title>Cadastro</Title>
+        </Header>
 
-            navigation.navigate('Meus');
-
-        } catch (error) {
-            console.log(error);
-            Alert.alert("Não foi possivel salvar");
-        }
-    } 
-
-    // useEffect(() => {
-    //     async function loadData(){
-    //         const data = await AsyncStorage.getItem(dataKey);
-    //         console.log(JSON.parse(data!))
-    //     }
-
-    //     loadData();
-
-        // async function removeAll() {
-        //     await AsyncStorage.removeItem(dataKey)
-        // }
-
-        // removeAll()
-    // }, [])
-
-    return (
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-            <Container>
-                <Header>
-                    <Title>
-                        Cadastro
-                    </Title>
-                </Header>
-
-                <Form>
-                    <Fields>
-                        <InputForm
-                            name="title"
-                            control={control}
-                            placeholder="Título"
-                            autoCapitalize="sentences"
-                            autoCorrect={false}
-                            error={errors.title && errors.title.message}
-                            multiline={false}
-                        />
-                        <InputForm
-                            name="content"
-                            control={control}
-                            placeholder="Compartilhe sua ideia"
-                            autoCapitalize="sentences"
-                            autoCorrect={false}
-                            error={errors.content && errors.content.message}
-                            multiline={true}
-                        />
-                    </Fields>
-                    <Button 
-                        title="Cadastrar"
-                        onPress={handleSubmit(handleRegister)}
-                    />
-                </Form>
-            </Container>
-        </TouchableWithoutFeedback>
-    );
+        <Form>
+          <Fields>
+            <InputForm
+              name="title"
+              control={control}
+              placeholder="Título"
+              autoCapitalize="sentences"
+              autoCorrect={false}
+              error={errors.title && errors.title.message}
+              multiline={false}
+            />
+            <InputForm
+              name="content"
+              control={control}
+              placeholder="Compartilhe sua ideia"
+              autoCapitalize="sentences"
+              autoCorrect={false}
+              error={errors.content && errors.content.message}
+              multiline={true}
+            />
+          </Fields>
+          <Button title="Cadastrar" onPress={handleSubmit(handleRegister)} />
+        </Form>
+      </Container>
+    </TouchableWithoutFeedback>
+  );
 }
