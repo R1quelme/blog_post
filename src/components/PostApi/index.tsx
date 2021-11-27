@@ -17,7 +17,7 @@ interface ApiData {
     body: string
 }
 
-interface Props {
+export interface Props {
     data: ApiData
 }
 

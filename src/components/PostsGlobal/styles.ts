@@ -8,10 +8,18 @@ export const Container = styled.View`
     margin-bottom: 16px;
 `;
 
+export const Title = styled.Text`
+    background-color: ${({ theme }) => theme.colors.shape};
+    font-size: ${RFValue(15)}px;
+    font-family: ${({ theme }) => theme.fonts.medium};
+    padding: 17px 24px;
+    text-align: center;
+`;
+
 export const Content = styled.Text`
     background-color: ${({ theme }) => theme.colors.shape};
-    height: ${RFPercentage(23)}px;
-    padding: 17px 24px;
+    height: ${RFPercentage(15)}px;
+    padding: 5px 24px;
 `;
 
 export const ButtonView = styled(BorderlessButton)``;

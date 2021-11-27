@@ -33,7 +33,7 @@ export function TabRoutes(){
             }}
         >
             <Tab.Screen 
-                name="Meus"
+                name="Dashboard"
                 component={Dashboard}
                 options={{
                     tabBarIcon: (({size, color}) => 
@@ -45,7 +45,7 @@ export function TabRoutes(){
                     )
                 }}
             />
-            <Tab.Screen 
+            {/* <Tab.Screen 
                 name="Posts" 
                 component={Posts}
                 options={{
@@ -57,7 +57,7 @@ export function TabRoutes(){
                         />
                     )
                 }}
-            />
+            /> */}
             <Tab.Screen 
                 name="Publicar"
                 component={Register}

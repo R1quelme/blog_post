@@ -29,7 +29,10 @@ export interface DataListProps extends PostCardProps {
     id: string;
 }
 
-
+export type EditTitleArgs = {
+    titleId: string;
+    postNewTitle: string
+}
 
 export function Dashboard() {
     const navigation = useNavigation();
@@ -40,6 +43,7 @@ export function Dashboard() {
     const [data, setData] = useState<DataListProps[]>([]);
     const [searchListData, setSearchListData] = useState<DataListProps[]>([]);
     const [searchText, setSearchText] = useState('');
+    const [title, setTitle] = useState<DataListProps[]>([])
 
     const { user, signOut } = useAuth();
  
@@ -100,7 +104,6 @@ export function Dashboard() {
 
         setSearchText(text);
     }
-    
 
     async function handleRemoveSkill(transactionId: string) {
         const response = await AsyncStorage.getItem(dataKey);
@@ -124,6 +127,19 @@ export function Dashboard() {
         ],
             {cancelable: false}
         )
+    }
+
+    function handleEditTitle({ titleId, postNewTitle }: EditTitleArgs){
+        const updatedTitle = title.map(title => ({...title}))
+
+        const titleToBeUpdated = updatedTitle.find(title => title.id === titleId)
+
+        if(!titleToBeUpdated)
+            return;
+
+        titleToBeUpdated.title = postNewTitle;
+
+        setTitle(updatedTitle);
     }
 
     return (
@@ -160,7 +176,12 @@ export function Dashboard() {
                     data={searchListData}
                     keyExtractor={item => item.id}
                     renderItem={({ item }) => 
-                        <PostsCard data={item} buttonDelete={() => alerta(item.title, item.id)} buttonView={() => handleView(item)}/>
+                        <PostsCard 
+                            data={item} 
+                            buttonEdit={handleEditTitle}
+                            buttonDelete={() => alerta(item.title, item.id)} 
+                            buttonView={() => handleView(item)}
+                        />
                     }
                 />
             </Posts>

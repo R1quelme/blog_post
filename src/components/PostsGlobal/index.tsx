@@ -1,10 +1,10 @@
 import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import React, { useRef } from "react";
-import { HeaderPost } from "../HeaderPost";
-import { DataListProps, EditTitleArgs } from '../../screens/Dashboard';
+import React from "react";
+import { useAuth } from "../../hooks/auth";
 
 import { 
     Container,
+    Title,
     Content,
     ButtonView,
     Footer,
@@ -21,22 +21,19 @@ export interface PostCardProps {
 }
 
 interface Props {
-    data: DataListProps,
-    buttonEdit: ({ titleId, postNewTitle }: EditTitleArgs) => void,
-    buttonDelete: () => void;
+    data: PostCardProps,
     buttonView: () => void;
 }
 
-export function PostsCard({ 
+export function PostsGlobal({ 
     data,
-    buttonEdit,
-    buttonDelete,
     buttonView
 } : Props){
+    const { user } = useAuth();
 
     return (
         <Container>
-            <HeaderPost data={data} buttonDelete={buttonDelete} buttonEdit={buttonEdit}/>
+            <Title>{data.title}</Title>
             <Content>{data.content}</Content>
 
             <Footer>

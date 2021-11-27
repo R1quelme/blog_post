@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { PostsCard, PostCardProps } from '../../components/PostsCards';
+import { PostCardProps } from '../../components/PostsCards';
+import { PostsGlobal } from "../../components/PostsGlobal";
 
 import {
     Container,
@@ -94,7 +95,7 @@ export function Posts() {
                 <PostList 
                     data={ListData}
                     keyExtractor={item => item.id}
-                    renderItem={({ item }) => <PostsCard data={item} buttonDelete={() => {}} buttonView={() => {navigation.navigate('View', { post: item })}}/>}
+                    renderItem={({ item }) => <PostsGlobal data={item} buttonView={() => {navigation.navigate('View', { post: item })}}/>}
                 />
             </Post>
         </Container>
