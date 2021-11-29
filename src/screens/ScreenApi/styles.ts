@@ -12,11 +12,12 @@ export const Header = styled.View`
     background-color: ${({ theme }) => theme.colors.secondary};
 
     width: 100%;
-    height: ${RFValue(113)}px;
+    height: ${RFValue(170)}px;
 
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     padding-bottom: 19px;
+    
 `;
 
 export const Title = styled.Text`
@@ -32,4 +33,6 @@ export const List = styled(FlatList as new () => FlatList<ApiDTO>)
         padding: 24
     },
     showsVerticalScrollIndicator: false
-})``;
+})`
+    margin-top: ${RFPercentage(4)}px;
+`;

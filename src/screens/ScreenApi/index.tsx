@@ -12,29 +12,29 @@ import { api } from '../../services/api';
 import { ApiDTO } from '../../dtos/ApiDTO';
 
 import { Load } from '../../components/Load';
+import { SearchBar } from '../../components/SearchBar';
 
 export function Api() {
+    const [searchText, setSearchText] = useState('')
     const [apis, setApis] = useState<ApiDTO[]>([]) 
     const [loading, setLoading] = useState(true)
-    // const apiData = {
-    //     idUser: 1,
-    //     id: 2,
-    //     title: 'Vamos cozinhar',
-    //     body: 'Conteudo aqui vai vai ds dada sdfsafas a fssdf a ada dsfsfsf'    
-    // }
+
+    function handleChangeInpuText(text: string){
+        setSearchText(text)
+    }
+
+    async function fetchApi() {
+        try {
+            const response = await api.get(`/posts/1`)
+            setApis(response.data)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false) 
+        }
+    }
 
     useEffect(() => {
-        async function fetchApi() {
-            try {
-                const response = await api.get('/posts')
-                setApis(response.data)
-            } catch (error) {
-                console.log(error)
-            } finally {
-                setLoading(false) 
-            }
-        }
-
         fetchApi();
     }, []);
 
@@ -45,6 +45,12 @@ export function Api() {
                     API's
                 </Title>
             </Header>
+
+            <SearchBar 
+                placeholder="Qual API você procura?"
+                onChangeText={handleChangeInpuText}
+                onSearchButtonPress={fetchApi}
+            />
 
             { loading ? <Load /> : 
                 <List

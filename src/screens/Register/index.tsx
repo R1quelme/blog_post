@@ -77,7 +77,7 @@ export function Register(){
             await AsyncStorage.setItem(dataKey, JSON.stringify(dataFormatted))
             reset();
 
-            navigation.navigate('Meus');
+            navigation.navigate('Dashboard');
 
         } catch (error) {
             console.log(error);
