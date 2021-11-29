@@ -18,13 +18,10 @@
 Clone the repository
 
 ```bash
-https://github.com/R1quelme/blog_post-master
+https://github.com/R1quelme/blog_post
 ```
 
-```bash
-# Enter the project folder
-cd gofinances
-
+```
 # Install the dependencies
 yarn
 # or
@@ -37,5 +34,9 @@ expo start
 Colocar credencias google como no arquivo env.example
 ```
 
-<br>  
+<br>
+
+<h1 align="center">
+<img alt="GoFinancesApp" title="GoFinancesApp" src="https://github.com/R1quelme/gofinances/blob/master/src/assets/telasAppp.jpeg" width="500px"/>
+</h1>
 
