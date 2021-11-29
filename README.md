@@ -36,6 +36,7 @@ Put google credentials as in file env.example
 
 <br>
 <a id="screens"></a>
+## :dart: Screens
 
 <h1 align="center">
 <img alt="GoFinancesApp" title="GoFinancesApp" src="https://github.com/R1quelme/gofinances/blob/master/src/assets/telasAppp.jpeg" width="500px"/>
