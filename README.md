@@ -12,3 +12,30 @@
 <strong>Blog_project</strong> is a development project <strong>mobile</strong> It is a blog application with post registration, viewing and calls in an EndPoint.
 
 <br>  
+<a id="howtouse"></a>
+
+## :dart: How to use
+Clone the repository
+
+```bash
+https://github.com/R1quelme/blog_post-master
+```
+
+```bash
+# Enter the project folder
+cd gofinances
+
+# Install the dependencies
+yarn
+# or
+npm install
+
+# Start the expo
+expo start
+
+# Login google
+Colocar credencias google como no arquivo env.example
+```
+
+<br>  
+
