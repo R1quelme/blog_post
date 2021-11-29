@@ -35,10 +35,9 @@ Put google credentials as in file env.example
 ```
 
 <br>
-<a id="howtouse"></a>
+<a id="screens"></a>
 
-## :dart: How to use
-Clone the repository
+## :dart: Screens
 
 <h1 align="center">
 <img alt="GoFinancesApp" title="GoFinancesApp" src="https://github.com/R1quelme/gofinances/blob/master/src/assets/telasAppp.jpeg" width="500px"/>
