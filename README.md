@@ -40,6 +40,6 @@ Put google credentials as in file env.example
 ## :iphone: Screens
 
 <h1 align="center">
-<img alt="GoFinancesApp" title="GoFinancesApp" src="https://github.com/R1quelme/gofinances/blob/master/src/assets/telasAppp.jpeg" width="500px"/>
+<img alt="GoFinancesApp" title="GoFinancesApp" src="https://github.com/R1quelme/gofinances/blob/master/src/assets/telasAppp.jp" width="500px"/>
 </h1>
 
