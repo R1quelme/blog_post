@@ -10,7 +10,7 @@ export const Container = styled.View`
 
 export const Content = styled.Text`
     background-color: ${({ theme }) => theme.colors.shape};
-    height: ${RFPercentage(23)}px;
+    height: ${RFPercentage(15)}px;
     padding: 17px 24px;
 `;
 

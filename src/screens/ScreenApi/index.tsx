@@ -13,14 +13,24 @@ import { ApiDTO } from '../../dtos/ApiDTO';
 
 import { Load } from '../../components/Load';
 import { SearchBar } from '../../components/SearchBar';
+import { Alert } from 'react-native';
 
 export function Api() {
-    const [searchText, setSearchText] = useState('')
     const [apis, setApis] = useState<ApiDTO[]>([]) 
     const [loading, setLoading] = useState(true)
 
-    function handleChangeInpuText(text: string){
-        setSearchText(text)
+    async function handleChangeInpuText(text: string) {
+        if(!text) {
+            fetchApi()
+            return;
+        }
+
+        try {
+            const response = await api.get(`/posts/${text}`)
+            setApis([response.data]);
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     async function fetchApi() {
@@ -28,6 +38,7 @@ export function Api() {
             const response = await api.get(`/posts`)
             setApis(response.data)
         } catch (error) {
+            Alert.alert("Erro ao buscar a Endpoint");
             console.log(error)
         } finally {
             setLoading(false) 
@@ -47,9 +58,9 @@ export function Api() {
             </Header>
 
             <SearchBar 
-                placeholder="Qual API você procura?"
+                placeholder="Qual Endpoint você procura?"
                 onChangeText={handleChangeInpuText}
-                onSearchButtonPress={fetchApi}
+                onSearchButtonPress={() => {}}
             />
 
             { loading ? <Load /> : 

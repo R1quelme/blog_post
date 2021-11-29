@@ -18,7 +18,6 @@ import {
     UserPhrase,
     Icon,
     Posts,
-    // Title,
     PostList,
     LogoutButton
 } from './styles';
@@ -63,7 +62,6 @@ export function Dashboard() {
 
             return {
                 id: item.id,
-                // userName: item.userName,
                 title: item.title,
                 content: item.content,
                 date
@@ -132,40 +130,26 @@ export function Dashboard() {
         await AsyncStorage.setItem('@app:title', JSON.stringify(title));   
     }
 
-    // function handleEditTitle({ titleId, postNewTitle }: EditTitleArgs){
-    //     const updatedTitle = data.map(data => ({...data}))
-
-    //     const titleToBeUpdated = updatedTitle.find(data => data.id === titleId)
-
-    //     if(!titleToBeUpdated)
-    //         return;
-
-    //     titleToBeUpdated.title = postNewTitle;
-
-    //     setData(updatedTitle);
-    //     saveTitle(updatedTitle);
-    // }
-
     function handleEditTitle({ titleId, postNewTitle }: EditTitleArgs){
         const updatedTitle = data.map(data => ({
           ...data,
           title: data.id === titleId ? postNewTitle : data.title
         }));
-        
+
         setData(updatedTitle);
         saveTitle(updatedTitle);
     }
 
     useEffect(() => {
-        async function loadTitle(){
-          const data = await AsyncStorage.getItem('@app:title');
+    async function loadTitle(){
+            const data = await AsyncStorage.getItem('@app:title');
         
-          const parsedData = data ? (JSON.parse(data) as DataListProps[]) : [];
-          setData(parsedData);
+            const parsedData = data ? (JSON.parse(data) as DataListProps[]) : [];
+            setData(parsedData);
         }
         
         loadTitle()
-      }, []);
+    }, []);
 
     return (
         <Container>

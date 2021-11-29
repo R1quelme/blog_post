@@ -1,5 +1,4 @@
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import React, { useRef } from "react";
+import React from "react";
 import { HeaderPost } from "../HeaderPost";
 import { DataListProps, EditTitleArgs } from '../../screens/Dashboard';
 
@@ -13,8 +12,6 @@ import {
 } from "./styles";
 
 export interface PostCardProps {
-    // Photo: object;
-    // userName: string;
     title: string;
     content: string;
     date: string;

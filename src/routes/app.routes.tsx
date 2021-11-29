@@ -5,14 +5,11 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-// const { Navigator, Screen } = createBottomTabNavigator();
-
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 import { Dashboard } from "../screens/Dashboard"; 
 import { Register } from "../screens/Register";
-import { Posts } from "../screens/Posts";
 import { View } from "../screens/View";
 import { Api } from "../screens/ScreenApi";
 
@@ -45,19 +42,6 @@ export function TabRoutes(){
                     )
                 }}
             />
-            {/* <Tab.Screen 
-                name="Posts" 
-                component={Posts}
-                options={{
-                    tabBarIcon: (({size, color}) => 
-                        <MaterialIcons 
-                            name="format-list-bulleted"
-                            size={size}
-                            color={color}
-                        />
-                    )
-                }}
-            /> */}
             <Tab.Screen 
                 name="Publicar"
                 component={Register}

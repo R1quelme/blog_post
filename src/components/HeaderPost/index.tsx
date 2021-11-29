@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { TextInput, TouchableOpacity } from "react-native";
 import { useAuth } from "../../hooks/auth";
 import { DataListProps, EditTitleArgs } from '../../screens/Dashboard';
@@ -11,14 +11,12 @@ import {
     Photo,
     User,
     UserName,
-    Title,
     Icons,
     ButtonEdit,
     IconEdit,
     ButtonDelete,
     IconDelete
 } from './styles';
-import { useEffect } from "react";
 
 interface Props {
     data: DataListProps,
@@ -67,9 +65,7 @@ export function HeaderPost({
                 <UserWrapper>
                     <Photo source={{ uri: user.photo }}/>
                     <User>
-                        {/* <UserName>{data.userName}</UserName> */}
                         <UserName>{ user.name }</UserName>
-                        {/* <Title>{data.title}</Title> */}
                         <TextInput 
                             value={postNewTitleValue}
                             onChangeText={setPostNewTitleValue}
@@ -98,13 +94,6 @@ export function HeaderPost({
                         <IconDelete name="delete" disabled={isEditing} style={{ opacity: isEditing ? 0.2 : 1 }}/>
                     </ButtonDelete>
                 </Icons>
-
-                {/* <Icons>
-                    <ButtonEdit onPress={buttonEdit}>
-                        <IconEdit name="edit"/>
-                    </ButtonEdit>
-                
-                </Icons> */}
             </CardHeader>
         </View>
     )

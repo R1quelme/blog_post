@@ -46,13 +46,8 @@ export function SignIn(){
         <Container>
             <Header>
                 <TitleWrapper>
-                    {/* <LogoPng
-                        width={RFValue(120)}
-                        height={RFValue(68)}
-                    /> */}
-
                     <Title>
-                        Compartilhe ideias {'\n'}
+                        Poste ideias {'\n'}
                         de uma maneira {'\n'}
                         muito simples
                     </Title>
