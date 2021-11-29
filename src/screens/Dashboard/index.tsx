@@ -129,6 +129,10 @@ export function Dashboard() {
         )
     }
 
+    async function saveTitle(title: DataListProps[]) {
+        await AsyncStorage.setItem('@app:title', JSON.stringify(title));   
+    }
+
     function handleEditTitle({ titleId, postNewTitle }: EditTitleArgs){
         const updatedTitle = title.map(title => ({...title}))
 
@@ -140,7 +144,19 @@ export function Dashboard() {
         titleToBeUpdated.title = postNewTitle;
 
         setTitle(updatedTitle);
+        saveTitle(updatedTitle);
     }
+
+    useEffect(() => {
+        async function loadTitle(){
+          const data = await AsyncStorage.getItem('@app:title');
+        
+          const parsedData = data ? (JSON.parse(data) as DataListProps[]) : [];
+          setTitle(parsedData);
+        }
+        
+        loadTitle()
+      }, []);
 
     return (
         <Container>

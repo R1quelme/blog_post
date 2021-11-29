@@ -25,7 +25,7 @@ export function Api() {
 
     async function fetchApi() {
         try {
-            const response = await api.get(`/posts/1`)
+            const response = await api.get(`/posts`)
             setApis(response.data)
         } catch (error) {
             console.log(error)
