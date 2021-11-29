@@ -31,7 +31,7 @@ npm install
 expo start
 
 # Login google
-Colocar credencias google como no arquivo env.example
+Put google credentials as in file env.example
 ```
 
 <br>
