@@ -43,7 +43,6 @@ export function Dashboard() {
     const [data, setData] = useState<DataListProps[]>([]);
     const [searchListData, setSearchListData] = useState<DataListProps[]>([]);
     const [searchText, setSearchText] = useState('');
-    const [title, setTitle] = useState<DataListProps[]>([])
 
     const { user, signOut } = useAuth();
  
@@ -133,17 +132,27 @@ export function Dashboard() {
         await AsyncStorage.setItem('@app:title', JSON.stringify(title));   
     }
 
+    // function handleEditTitle({ titleId, postNewTitle }: EditTitleArgs){
+    //     const updatedTitle = data.map(data => ({...data}))
+
+    //     const titleToBeUpdated = updatedTitle.find(data => data.id === titleId)
+
+    //     if(!titleToBeUpdated)
+    //         return;
+
+    //     titleToBeUpdated.title = postNewTitle;
+
+    //     setData(updatedTitle);
+    //     saveTitle(updatedTitle);
+    // }
+
     function handleEditTitle({ titleId, postNewTitle }: EditTitleArgs){
-        const updatedTitle = title.map(title => ({...title}))
-
-        const titleToBeUpdated = updatedTitle.find(title => title.id === titleId)
-
-        if(!titleToBeUpdated)
-            return;
-
-        titleToBeUpdated.title = postNewTitle;
-
-        setTitle(updatedTitle);
+        const updatedTitle = data.map(data => ({
+          ...data,
+          title: data.id === titleId ? postNewTitle : data.title
+        }));
+        
+        setData(updatedTitle);
         saveTitle(updatedTitle);
     }
 
@@ -152,7 +161,7 @@ export function Dashboard() {
           const data = await AsyncStorage.getItem('@app:title');
         
           const parsedData = data ? (JSON.parse(data) as DataListProps[]) : [];
-          setTitle(parsedData);
+          setData(parsedData);
         }
         
         loadTitle()
