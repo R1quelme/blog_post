@@ -12,6 +12,7 @@ import { Dashboard } from "../screens/Dashboard";
 import { Register } from "../screens/Register";
 import { View } from "../screens/View";
 import { Api } from "../screens/ScreenApi";
+import { Posts } from "../screens/Posts";
 
 export function TabRoutes(){
     const theme = useTheme();
@@ -32,6 +33,19 @@ export function TabRoutes(){
             <Tab.Screen 
                 name="Dashboard"
                 component={Dashboard}
+                options={{
+                    tabBarIcon: (({size, color}) => 
+                        <MaterialIcons 
+                            name="account-circle"
+                            size={size}
+                            color={color}
+                        />
+                    )
+                }}
+            />
+            <Tab.Screen 
+                name="Posts"
+                component={Posts}
                 options={{
                     tabBarIcon: (({size, color}) => 
                         <MaterialIcons 
