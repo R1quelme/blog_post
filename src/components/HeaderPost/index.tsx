@@ -63,9 +63,9 @@ export function HeaderPost({
         <View>
             <CardHeader>
                 <UserWrapper>
-                    <Photo source={{ uri: user.photo }}/>
+                    <Photo source={{ uri: data.photo }}/>
                     <User>
-                        <UserName>{ user.name }</UserName>
+                        <UserName>{ data.name }</UserName>
                         <TextInput 
                             value={postNewTitleValue}
                             onChangeText={setPostNewTitleValue}

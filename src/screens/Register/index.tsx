@@ -14,7 +14,6 @@ import { useNavigation } from '@react-navigation/native';
 
 import { InputForm } from '../../components/Forms/InputForm'
 import { Button } from '../../components/Forms/Button'
-
  
 import {
     Container,
@@ -59,7 +58,9 @@ export function Register(){
             id: String(uuid.v4()),
             title: form.title,
             content: form.content,
-            date: new Date()
+            date: new Date(),
+            name: user.name,
+            photo: user.photo
         }
         
         try {
@@ -69,7 +70,7 @@ export function Register(){
             const dataFormatted = [
                 ...currentData,
                 newTransaction
-            ]
+            ] 
 
             await AsyncStorage.setItem(dataKey, JSON.stringify(dataFormatted))
             reset();
@@ -81,6 +82,21 @@ export function Register(){
             Alert.alert("Não foi possivel salvar");
         }
     } 
+
+        // useEffect(() => {
+    //     async function loadData(){
+    //         const data = await AsyncStorage.getItem(dataKey);
+    //         console.log(JSON.parse(data!))
+    //     }
+
+    //     loadData();
+
+        // async function removeAll() {
+        //     await AsyncStorage.removeItem(dataKey)
+        // }
+
+        // removeAll()
+    // }, [])
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
