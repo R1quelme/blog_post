@@ -15,8 +15,6 @@ export interface PostCardProps {
     title: string;
     content: string;
     date: string;
-    name: string;
-    photo: string
 }
 
 interface Props {

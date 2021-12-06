@@ -13,6 +13,8 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 
 export interface DataListProps extends PostCardProps {
     id: string;
+    name: string;
+    photo?: string;
 }
 
 
@@ -60,7 +62,9 @@ export function Posts() {
                             // userName: item.userName,
                             title: item.title,
                             content: item.content,
-                            date
+                            date,
+                            name: item.name,
+                            photo: item.photo
                         }
 
                     });

@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import { TextInput, TouchableOpacity } from "react-native";
-import { useAuth } from "../../hooks/auth";
 import { DataListProps, EditTitleArgs } from '../../screens/Dashboard';
 import { Feather } from '@expo/vector-icons'
 
@@ -27,13 +26,11 @@ interface Props {
 export function HeaderPost({ 
     data,
     buttonEdit,
-    buttonDelete
+    buttonDelete,
 } : Props) {
     const [isEditing, setIsEditing] = useState(false);
     const [postNewTitleValue, setPostNewTitleValue] = useState(data.title);
     const textInputRef = useRef<TextInput>(null)
-
-    const { user } = useAuth()
 
     function handleStartEditing() {
         setIsEditing(true)
@@ -59,15 +56,13 @@ export function HeaderPost({
         }
     }, [isEditing])
 
-    // console.log(data)
-
     return (
         <View>
             <CardHeader>
                 <UserWrapper>
-                    <Photo source={{ uri: user.photo }}/>
+                    <Photo source={{ uri: data.photo }}/>
                     <User>
-                        <UserName>{ user.name }</UserName>
+                        <UserName>{ data.name }</UserName>
                         <TextInput 
                             value={postNewTitleValue}
                             onChangeText={setPostNewTitleValue}
@@ -77,7 +72,7 @@ export function HeaderPost({
                         />
                     </User>
                 </UserWrapper>
-
+            
                 <Icons>
                     {isEditing ? (
                         <TouchableOpacity
@@ -96,6 +91,7 @@ export function HeaderPost({
                         <IconDelete name="delete" disabled={isEditing} style={{ opacity: isEditing ? 0.2 : 1 }}/>
                     </ButtonDelete>
                 </Icons>
+
             </CardHeader>
         </View>
     )

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { 
     TouchableWithoutFeedback, 
     Keyboard,
@@ -83,7 +83,7 @@ export function Register(){
         }
     } 
 
-        // useEffect(() => {
+    // useEffect(() => {
     //     async function loadData(){
     //         const data = await AsyncStorage.getItem(dataKey);
     //         console.log(JSON.parse(data!))
@@ -91,11 +91,11 @@ export function Register(){
 
     //     loadData();
 
-        // async function removeAll() {
-        //     await AsyncStorage.removeItem(dataKey)
-        // }
+    //     async function removeAll() {
+    //         await AsyncStorage.removeItem(dataKey)
+    //     }
 
-        // removeAll()
+    //     removeAll()
     // }, [])
 
     return (

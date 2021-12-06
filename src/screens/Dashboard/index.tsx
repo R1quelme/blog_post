@@ -26,6 +26,8 @@ import { Alert } from 'react-native';
 
 export interface DataListProps extends PostCardProps {
     id: string;
+    name: string;
+    photo?: string;
 }
 
 export type EditTitleArgs = {
@@ -64,7 +66,9 @@ export function Dashboard() {
                 id: item.id,
                 title: item.title,
                 content: item.content,
-                date
+                date,
+                name: item.name,
+                photo: item.photo
             }
         })   
 
@@ -127,7 +131,7 @@ export function Dashboard() {
     }
 
     async function saveTitle(title: DataListProps[]) {
-        await AsyncStorage.setItem('@app:title', JSON.stringify(title));   
+        await AsyncStorage.setItem(dataKey, JSON.stringify(title));   
     }
 
     function handleEditTitle({ titleId, postNewTitle }: EditTitleArgs){
