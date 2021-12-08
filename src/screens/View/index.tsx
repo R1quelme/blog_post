@@ -26,7 +26,7 @@ export function View() {
 
     interface NavigationProps {
         goBack: () => void
-    }
+    } 
 
     const navigation = useNavigation<NavigationProps>();
 

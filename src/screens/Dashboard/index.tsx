@@ -184,7 +184,6 @@ export function Dashboard() {
             />
 
             <Posts>
-                {/* <Title>Publicações</Title> */}
                 <PostList 
                     data={searchListData}
                     keyExtractor={item => item.id}
@@ -194,6 +193,7 @@ export function Dashboard() {
                             buttonEdit={handleEditTitle}
                             buttonDelete={() => alerta(item.title, item.id)} 
                             buttonView={() => handleView(item)}
+                            admin={true}
                         />
                     }
                 />

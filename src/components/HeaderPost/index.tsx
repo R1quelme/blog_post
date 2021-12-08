@@ -20,13 +20,15 @@ import {
 interface Props {
     data: DataListProps,
     buttonEdit: ({ titleId, postNewTitle }: EditTitleArgs) => void,
-    buttonDelete: () => void
+    buttonDelete: () => void,
+    admin: boolean;
 }
 
 export function HeaderPost({ 
     data,
     buttonEdit,
     buttonDelete,
+    admin
 } : Props) {
     const [isEditing, setIsEditing] = useState(false);
     const [postNewTitleValue, setPostNewTitleValue] = useState(data.title);
@@ -73,24 +75,26 @@ export function HeaderPost({
                     </User>
                 </UserWrapper>
             
-                <Icons>
-                    {isEditing ? (
-                        <TouchableOpacity
-                            onPress={handleCancelEditing}
-                            style={{ paddingHorizontal: 24 }}
-                        >
-                            <Feather name="x" size={24} color="#b2b2b2" />
-                        </TouchableOpacity>
-                    ) : (
-                        <ButtonEdit onPress={handleStartEditing}>
-                            <IconEdit name="edit"/>
-                        </ButtonEdit>
-                    )}
+                {admin && (
+                    <Icons>
+                        {isEditing ? (
+                            <TouchableOpacity
+                                onPress={handleCancelEditing}
+                                style={{ paddingHorizontal: 24 }}
+                            >
+                                <Feather name="x" size={24} color="#b2b2b2" />
+                            </TouchableOpacity>
+                        ) : (
+                            <ButtonEdit onPress={handleStartEditing}>
+                                <IconEdit name="edit"/>
+                            </ButtonEdit>
+                        )}
 
-                    <ButtonDelete onPress={buttonDelete}>
-                        <IconDelete name="delete" disabled={isEditing} style={{ opacity: isEditing ? 0.2 : 1 }}/>
-                    </ButtonDelete>
-                </Icons>
+                        <ButtonDelete onPress={buttonDelete}>
+                            <IconDelete name="delete" disabled={isEditing} style={{ opacity: isEditing ? 0.2 : 1 }}/>
+                        </ButtonDelete>
+                    </Icons>
+                )}
 
             </CardHeader>
         </View>

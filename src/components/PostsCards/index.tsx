@@ -22,18 +22,20 @@ interface Props {
     buttonEdit: ({ titleId, postNewTitle }: EditTitleArgs) => void,
     buttonDelete: () => void;
     buttonView: () => void;
+    admin: boolean
 }
 
 export function PostsCard({ 
     data,
     buttonEdit,
     buttonDelete,
-    buttonView
+    buttonView,
+    admin
 } : Props){
 
     return (
         <Container>
-            <HeaderPost data={data} buttonDelete={buttonDelete} buttonEdit={buttonEdit}/>
+            <HeaderPost data={data} buttonDelete={buttonDelete} buttonEdit={buttonEdit} admin={admin}/>
             <Content>{data.content}</Content>
 
             <Footer>

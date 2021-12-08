@@ -104,6 +104,7 @@ export function Posts() {
                             buttonView={() => {navigation.navigate('View', { post: item })}}
                             buttonDelete={() => {}}
                             buttonEdit={() => {}}
+                            admin={false}
                         />}
                 />
             </Post>
