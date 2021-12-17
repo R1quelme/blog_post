@@ -163,7 +163,7 @@ export function Dashboard() {
                         <Photo source={{ uri: user.photo }}/>
                         <User>
                             <UserGreeting>Olá,  
-                                <UserName> { user.name }</UserName>
+                                <UserName>{ user.name }</UserName>
                             </UserGreeting>
                             <UserPhrase>Compartilhe conhecimentos</UserPhrase>
                         </User>

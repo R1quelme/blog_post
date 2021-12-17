@@ -90,7 +90,7 @@ export function Posts() {
         <Container>
             <Header>
                 <Title>
-                    Posts
+                    Feed de Posts
                 </Title>
             </Header>
 

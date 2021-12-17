@@ -39,7 +39,7 @@ export const Align = styled.View`
 `;
 
 export const Content = styled.View`
-    height: ${RFPercentage(23)}px;
+    height: ${RFPercentage(60)}px;
     padding: 17px 24px;
 `;
 
