@@ -11,8 +11,9 @@
 
 <strong>Blog_project</strong> is a development project <strong>mobile</strong> It is a blog application with post registration, viewing and calls in an EndPoint.
 
-Esse app deverá ter cadastro de posts, pesquisa de posts e visualização de posts.
-No cadastro de posts, o usuário poderá informar os seguintes dados: Título do post(obrigatório);
+* Esse app deverá ter cadastro de posts, pesquisa de posts e visualização de posts.
+* No cadastro de posts, o usuário poderá informar os seguintes dados: Título do post(obrigatório);
+
 Texto do post (ilimitado e obrigatório);
 Data do post (obrigatório);
 Autor (obrigatório).
