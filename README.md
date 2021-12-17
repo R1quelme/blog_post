@@ -11,6 +11,21 @@
 
 <strong>Blog_project</strong> is a development project <strong>mobile</strong> It is a blog application with post registration, viewing and calls in an EndPoint.
 
+Esse app deverá ter cadastro de posts, pesquisa de posts e visualização de posts.
+No cadastro de posts, o usuário poderá informar os seguintes dados: Título do post(obrigatório);
+Texto do post (ilimitado e obrigatório);
+Data do post (obrigatório);
+Autor (obrigatório).
+Também deve existir a opção de editar e excluir os posts.
+Na pesquisa de posts, o usuário poderá pesquisar pelo título dos posts cadastrados.
+Deverá salvar os dados no LocalStorage com AsyncStorage.
+Deverá criar ao menos um componente e usar o componente no layout, esse componente precisará receber props usar as props dentro dele.
+Deverá usar react-navigation para mudar de telas.
+Deverá fazer o request ter uma tela com a listagem vinda desse endpoint. https://jsonplaceholder.typicode.com/posts
+Fazer um request passando o id para buscar o detalhe no seguinte endpoint. https://jsonplaceholder.typicode.com/posts/1
+
+
+
 <br>  
 <a id="howtouse"></a>
 
