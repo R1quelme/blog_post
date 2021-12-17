@@ -29,7 +29,7 @@ Deverá criar ao menos um componente e usar o componente no layout, esse compone
 
 Deverá usar react-navigation para mudar de telas.
 
-Deverá fazer o request ter uma tela com a listagem vinda desse endpoint. https://jsonplaceholder.typicode.com/posts
+Deverá fazer o request ter uma tela com a listagem vinda desse endpoint. https://jsonplaceholder.typicode.com/posts<br>
 Fazer um request passando o id para buscar o detalhe no seguinte endpoint. https://jsonplaceholder.typicode.com/posts/1
 
 <br>  
