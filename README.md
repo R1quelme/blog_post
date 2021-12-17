@@ -61,6 +61,6 @@ Put google credentials as in file env.example
 ## :iphone: Screens
 
 <h1 align="center">
-<img alt="BlogPost" title="BlogPost" src="https://github.com/R1quelme/blog_post/blob/main/src/assets/telasApp.jpeg" width="500px"/>
+<img alt="BlogPost" title="BlogPost" src="https://github.com/R1quelme/blog_post/blob/main/src/assets/telas.jpeg" width="500px"/>
 </h1>
 
