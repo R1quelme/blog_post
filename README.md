@@ -9,7 +9,7 @@
 
 ## :page_facing_up: About the project blog_post
 
-<strong>Blog_project</strong> is a development project <strong>mobile</strong> It is a blog application with post registration, viewing and calls in an EndPoint.
+App para um blog.
 
 * Esse app deverá ter cadastro de posts, pesquisa de posts e visualização de posts.
 
@@ -31,8 +31,6 @@ Deverá usar react-navigation para mudar de telas.
 
 Deverá fazer o request ter uma tela com a listagem vinda desse endpoint. https://jsonplaceholder.typicode.com/posts
 Fazer um request passando o id para buscar o detalhe no seguinte endpoint. https://jsonplaceholder.typicode.com/posts/1
-
-
 
 <br>  
 <a id="howtouse"></a>
